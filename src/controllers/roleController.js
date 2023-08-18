@@ -1,4 +1,4 @@
-const roleModel = require("../models/roleModel");
+const roleModel = require("../models/rolesModel");
 
 const getRoles = async (req, res) => {
   try {
@@ -17,7 +17,13 @@ const getRoleById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
+const getRoleByEmail = async (req, res) => {
+  try {
+    const { email } = req.params;
+    const roles = await roleModel.find({ email: email });
+    res.status(200).json(roles[0]);
+  } catch (error) {}
+};
 const addNewRole = async (req, res) => {
   try {
     const role = await roleModel.create(req.body);
@@ -61,6 +67,7 @@ const deleteRole = async (req, res) => {
 module.exports = {
   getRoles,
   getRoleById,
+  getRoleByEmail,
   updateRole,
   deleteRole,
   addNewRole,

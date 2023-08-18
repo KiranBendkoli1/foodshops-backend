@@ -6,6 +6,8 @@ const foodshopSchema = mongoose.Schema({
   description: String,
   address: String,
   contact: String,
+  key: String,
+  email: String,
   likes: {
     type: Number,
     default: 0,
@@ -33,6 +35,15 @@ const foodshopSchema = mongoose.Schema({
   images: {
     type: [],
     default: [],
+  },
+  discounts: {
+    type: [{ item: String, discount: Number }],
+    default: [],
+  },
+  selectPosition: [],
+  postedOn: {
+    type: Date,
+    default:Date.now
   },
 });
 
