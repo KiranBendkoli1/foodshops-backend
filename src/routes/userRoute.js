@@ -11,8 +11,8 @@ const foodshopRoute = express.Router();
 
 foodshopRoute.get("/", getUsers);
 foodshopRoute.get("/:id", getUserById);
-foodshopRoute.post("/", updateUser);
-foodshopRoute.put("/:id", deleteUser);
-foodshopRoute.delete("/:id", addNewUser);
+foodshopRoute.post("/", addNewUser);
+foodshopRoute.put("/:id", updateUser);
+foodshopRoute.delete("/:id", deleteUser);
 
 module.exports = foodshopRoute;
