@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 
 const shopOwnerSchema = mongoose.Schema({
-  shopname: String,
+  name: String,
   email: String,
-  contact:String,
+  contact: String,
+  password: String,
+  token:String,
   date: {
     type: Date,
     default: Date.now,

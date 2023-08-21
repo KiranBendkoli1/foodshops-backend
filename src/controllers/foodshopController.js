@@ -18,6 +18,16 @@ const getFoodShopById = async (req, res) => {
   }
 };
 
+const getFoodShopByEmail = async (req, res) => {
+  try {
+    const { email } = req.params;
+    const foodshop = await foodshopModel.find({ email: email });
+    res.status(200).json(foodshop[0]);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const addNewFoodShop = async (req, res) => {
   try {
     const foodshop = await foodshopModel.create(req.body);
@@ -61,6 +71,7 @@ const deleteFoodShop = async (req, res) => {
 module.exports = {
   getFoodShops,
   getFoodShopById,
+  getFoodShopByEmail,
   updateFoodShop,
   deleteFoodShop,
   addNewFoodShop,

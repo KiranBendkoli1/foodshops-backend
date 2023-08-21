@@ -8,6 +8,7 @@ const foodshopSchema = mongoose.Schema({
   contact: String,
   key: String,
   email: String,
+  selectPosition: [],
   likes: {
     type: Number,
     default: 0,
