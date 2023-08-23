@@ -5,6 +5,10 @@ const userSchema = mongoose.Schema({
   email: String,
   password:String,
   token:String,
+  role:{
+    type:String,
+    default:"regular"
+  },
   date: {
     type: Date,
     default: Date.now,

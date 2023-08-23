@@ -22,11 +22,11 @@ const foodshopSchema = mongoose.Schema({
     default: [],
   },
   liked: {
-    type: [{ user: String }],
+    type: [],
     default: [],
   },
   disliked: {
-    type: [{ user: String }],
+    type: [],
     default: [],
   },
   type: {
@@ -34,7 +34,7 @@ const foodshopSchema = mongoose.Schema({
     default: [],
   },
   images: {
-    type: [],
+    type: [String],
     default: [],
   },
   discounts: {
@@ -44,7 +44,7 @@ const foodshopSchema = mongoose.Schema({
   selectPosition: [],
   postedOn: {
     type: Date,
-    default:Date.now
+    default: Date.now,
   },
 });
 

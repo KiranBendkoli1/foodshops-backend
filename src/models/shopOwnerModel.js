@@ -6,6 +6,10 @@ const shopOwnerSchema = mongoose.Schema({
   contact: String,
   password: String,
   token:String,
+  role:{
+    type:String,
+    default:"shopOwner"
+  },
   date: {
     type: Date,
     default: Date.now,
