@@ -9,7 +9,7 @@ const register = async (req, res) => {
     const { name, email, password, contact, userType } = req.body;
     console.log(req.body);
     if (!(name && email && password && userType)) {
-      res.status(200).json({
+      res.status(401).json({
         status: "failure",
         message: "Please enter all the fields",
         data: {},
@@ -19,7 +19,7 @@ const register = async (req, res) => {
       (await userModel.findOne({ email: email })) ||
       (await shopOwnerModel.findOne({ email: email }));
     if (userExists) {
-      res.status(200).json({
+      res.status(401).json({
         status: "failure",
         message: "User already exists",
         data: {},
@@ -58,7 +58,7 @@ const register = async (req, res) => {
       data: user,
     });
   } catch (error) {
-    res.status(201).json({
+    res.status(401).json({
       status: "failure",
       message: "Error creating user",
       data: error,
@@ -70,10 +70,9 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!(email && password)) {
-      res.status(200).json({
+      res.status(401).json({
         status: "failure",
         message: "Please enter all the fields",
-        data: {},
       });
     }
     const user =
@@ -81,7 +80,7 @@ const login = async (req, res) => {
       (await shopOwnerModel.findOne({ email })) ||
       (await adminModel.findOne({ email }));
     if (!user) {
-      res.status(200).json({
+      res.status(404).json({
         status: "failure",
         message: "User does not exist",
         data: {},
@@ -90,7 +89,7 @@ const login = async (req, res) => {
     if (user) {
       const isMatched = await bcrypt.compare(password, user.password);
       if (!isMatched) {
-        res.status(200).json({
+        res.status(401).json({
           status: "failure",
           message: "You have entered wrong password",
           data: {},

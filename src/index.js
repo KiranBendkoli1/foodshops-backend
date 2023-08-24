@@ -13,6 +13,7 @@ const userRoute = require("./routes/userRoute");
 const shopOwnerRoute = require("./routes/shopOwnerRoute");
 const authRoute = require("./routes/authRoute");
 const adminModel = require("./models/adminModel");
+const connection = require("./database/mongodb");
 const app = express();
 app.use(cors());
 // app.use(express.json());
@@ -29,34 +30,30 @@ app.use("/users", userRoute);
 app.use("/shop-owner", shopOwnerRoute);
 app.use("/auth", authRoute);
 
-
-mongoose
-  .connect(`${process.env.CONNECTION_STRING}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    family: 4,
-  })
-  .then(() => {
-    console.log("Connected to mongodb");
-    app.listen(5000, () => {
-      console.log(`Node API is running on port 5000 `);
-    });
-  })
-  .catch((error) => {
-    console.log(error);
+if (connection) {
+  console.log("Connected to mongodb");
+  app.listen(5000, () => {
+    console.log(`Node API is running on port 5000 `);
   });
+} else {
+  console.log("Error connection database");
+}
+// )
+// .catch((error) => {
+//   console.log(error);
+// });
 
-  // app.post("/admin", async (req, res) => {
-  //   const { name, email, password } = req.body;
-  //   if (!(name && email && password)) {
-  //     res.send("all fields required");
-  //   } else {
-  //     const encryptedPassword = await bcrypt.hash(password, 10);
-  //     const admin = await adminModel.create({
-  //       name,
-  //       email,
-  //       password: encryptedPassword,
-  //     });
-  //     res.status(201).json(admin);  
-  //   }
-  // });
+// app.post("/admin", async (req, res) => {
+//   const { name, email, password } = req.body;
+//   if (!(name && email && password)) {
+//     res.send("all fields required");
+//   } else {
+//     const encryptedPassword = await bcrypt.hash(password, 10);
+//     const admin = await adminModel.create({
+//       name,
+//       email,
+//       password: encryptedPassword,
+//     });
+//     res.status(201).json(admin);
+//   }
+// });
